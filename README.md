@@ -7,7 +7,7 @@
 3. [SQlAlchemy](#sqlalchemy)
    - [Middle abstraction layer](#middle-abstraction-layer)
    - [Highest abstraction layer](#highest-abstraction-layer)
-4. []
+4. [Code along CRUD](#code-along---crud)
 
 # PostgreSQL 
 
@@ -88,7 +88,7 @@ SQLAlchemy is an object-relational mapper, it bridges the gap between python obj
 
 - - - 
 
-# Middle abstraction layer
+## Middle abstraction layer
 
 Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Language, simplifies queries to the database using tables - connect Python and the SQLAlchemy library to the database, using cleaner code.
 
@@ -112,7 +112,7 @@ Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Lan
 
 - - - 
 
-# Highest abstraction layer
+## Highest abstraction layer
 
 Introducing class-based models- SQLAlchemy's highest abstraction layer, the ORM - Simplifies queries to the database using class-based objects - Connect Python and the SQLAlchemy library to the database, using cleaner code.
 
@@ -120,9 +120,6 @@ Class - collection of methods that serve a common purpose, with each method havi
 
 .connect .select .execute - methods have specific duty. 
 Using class-based models - can reuse methods throughout application without repeating yourself.
-
-### Create a new file called "sql-orm.py"
-- `touch sql-orm.py`
 
 ### Query 1 - select all records from the "Artist" table
 ```python
@@ -179,10 +176,10 @@ for track in tracks:
 
 # Code along - CRUD 
 
-C - CREATE 
-R - READ 
-U - UPDATE
-D - DELETE
+- C - CREATE 
+- R - READ 
+- U - UPDATE
+- D - DELETE
 
 ## Code-along 1: Create and read
 Building class-based models to Create and Read data on your Postgres Database. Allows us to define custom tables to add and retrieve records using the ORM. Extending the ORM declarative_base to generate new tables and records.

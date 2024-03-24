@@ -2,7 +2,7 @@
 
 ## What I have learnt
 1. [PostgreSQL](#postgresql)
-  -[Postgresql from command line](#postgresql-from-command-line)
+  - [Postgresql from command line](#postgresql-from-command-line)
 2. [Psycopg2](#psycopg2)
 3. [SQlAlchemy](#sqlalchemy)
    - [Middle abstraction layer](#middle-abstraction-layer)
@@ -16,9 +16,6 @@ PostgreSQL is a free, open source relational database managment system that has 
 ### [Download PostgreSQL on my mac](https://www.postgresql.org/download/)
 
 ## Commands used:
-
-<details>
-<summary>Click here</summmary>
 
 ### Download the Chinook PostgreSql database
 - `wget https://raw.githubusercontent.com/lerocha/chinook-database/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql`
@@ -38,13 +35,10 @@ PostgreSQL is a free, open source relational database managment system that has 
 
 ### Install / Initialize the downloaded Chinook SQL database
 - `\i Chinook_PostgreSql.sql`
-</details>
 
+- - - 
 
 ## Postgresql from command line 
-
-<details>
-<summary>Click here</summmary>
 
 ### Quit the entire Postgres CLI
 - `\q`
@@ -72,28 +66,31 @@ PostgreSQL is a free, open source relational database managment system that has 
 
 ### Retrieve all tracks from the "Track" table, using the "Composer" of 'Queen'
 - `SELECT * FROM "Track" WHERE "Composer" = 'Queen';`
-</details>
 
 - - - 
 
 # Psycopg2
 
-python package and data adapter - psycopg2 - Run Postgres commands from Python code, instead of the CLI - Use the psycopg2 library and it's inbuilt methods.
+Psycopg2 is a python package and data adapter where you can run Postgres commands from Python code, instead of the CLI - Use the psycopg2 library and it's inbuilt methods.
 
 ### Install the "psycopg2" Python package
 - `pip3 install psycopg2`
 
+- - - 
+
 # SQlAlchemy
 
-object- relational mapper - bridges gap between python objects and postgres tables. Query and manipulate a database using Python, instead of raw SQL commands.- SQL Alchemy 
+SQLAlchemy is an object-relational mapper, it bridges the gap between python objects and postgres tables - Query and manipulate a database using Python, instead of raw SQL commands.
 
 ### Install the "SQLAlchemy" Python package
 - `pip3 install SQLAlchemy`
 - `pip3 install sqlalchemy==1.4.46`
 
+- - - 
+
 # Middle abstraction layer
 
-Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Language. - Simplifies queries to the database using tables. - Connect Python and the SQLAlchemy library to the database, using cleaner code.
+Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Language, simplifies queries to the database using tables - connect Python and the SQLAlchemy library to the database, using cleaner code.
 
 ### Query 1 - select all records from the "Artist" table
 - `select_query = artist_table.select()`
@@ -113,14 +110,16 @@ Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Lan
 ### Query 6 - select all tracks where the composer is 'Queen' from the "Track" table
 - `select_query = track_table.select().where(track_table.c.Composer == "Queen")`
 
+- - - 
+
 # Highest abstraction layer
 
-Introducing class-based models- SQLAlchemy's highest abstraction layer, the ORM. - Simplifies queries to the database using class-based objects. - Connect Python and the SQLAlchemy library to the database, using cleaner code.
+Introducing class-based models- SQLAlchemy's highest abstraction layer, the ORM - Simplifies queries to the database using class-based objects - Connect Python and the SQLAlchemy library to the database, using cleaner code.
 
 Class - collection of methods that serve a common purpose, with each method having its own purpose.
 
 .connect .select .execute - methods have specific duty. 
-using class-based models - can reuse methods throughout application without repeating yourself.
+Using class-based models - can reuse methods throughout application without repeating yourself.
 
 ### Create a new file called "sql-orm.py"
 - `touch sql-orm.py`
@@ -176,9 +175,18 @@ for track in tracks:
     )
 ```
 
+- - - 
+
 # Code along - CRUD 
+
 C - CREATE 
 R - READ 
 U - UPDATE
 D - DELETE
+
+## Code-along 1: Create and read
+Building class-based models to Create and Read data on your Postgres Database. Allows us to define custom tables to add and retrieve records using the ORM. Extending the ORM declarative_base to generate new tables and records.
+
+## Code-Along 2: Update and Delete
+Using class-based models to Update and Delete data on your Postgres Database. Allows us to retrieve records in order to make necessary updates, or entirely delete them from the database. Securely accessing our database to properly manipulate data, or to delete data.
 

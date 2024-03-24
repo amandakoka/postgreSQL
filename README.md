@@ -1,39 +1,184 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Relational database - PostgreSQL
 
-Welcome,
+## What I have learnt
+1. [PostgreSQL](#postgresql)
+  -[Postgresql from command line](#postgresql-from-command-line)
+2. [Psycopg2](#psycopg2)
+3. [SQlAlchemy](#sqlalchemy)
+   - [Middle abstraction layer](#middle-abstraction-layer)
+   - [Highest abstraction layer](#highest-abstraction-layer)
+4. []
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+# PostgreSQL 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+PostgreSQL is a free, open source relational database managment system that has powerful features and acts as a primary database for many web/mobile apllications. PostgreSQL is an object-relational database, offering features like table inheritance and function overloading. The postgreSQL server runs as a service and can be used from the command line, through graphical clients, or directly from your own applications.
 
-## Codeanywhere Reminders
+### [Download PostgreSQL on my mac](https://www.postgresql.org/download/)
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+## Commands used:
 
-`python3 -m http.server`
+<details>
+<summary>Click here</summmary>
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Download the Chinook PostgreSql database
+- `wget https://raw.githubusercontent.com/lerocha/chinook-database/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql`
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### Access the Postgres CLI
+- `psql`
 
-`http_server`
+### Create the new "chinook" database
+- `CREATE DATABASE chinook;`
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### View existing tables on the database
+- `\l`
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Switch between databases
+- `\c postgres` (switch to the database called "postgres")
+- `\c chinook` (switch to the database called "chinook")
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Install / Initialize the downloaded Chinook SQL database
+- `\i Chinook_PostgreSql.sql`
+</details>
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Postgresql from command line 
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+<details>
+<summary>Click here</summmary>
 
----
+### Quit the entire Postgres CLI
+- `\q`
 
-Happy coding!
+### Display all tables on the "chinook" database
+- `\dt`
+
+### Quit the query / return back to CLI after a query
+- `q`
+
+### Retrieve all data from the "Artist" table
+- `SELECT * FROM "Artist";`
+
+### Retrieve only the "Name" column from the "Artist" table
+- `SELECT "Name" FROM "Artist";`
+
+### Retrieve only "Queen" from the "Artist" table
+- `SELECT * FROM "Artist" WHERE "Name" = 'Queen';`
+
+### Retrieve only "Queen" from the "Artist" table, but using the "ArtistId" of '51'
+- `SELECT * FROM "Artist" WHERE "ArtistId" = 51;`
+
+### Retrieve all albums from the "Album" table, using the "ArtistId" of '51'
+- `SELECT * FROM "Album" WHERE "ArtistId" = 51;`
+
+### Retrieve all tracks from the "Track" table, using the "Composer" of 'Queen'
+- `SELECT * FROM "Track" WHERE "Composer" = 'Queen';`
+</details>
+
+- - - 
+
+# Psycopg2
+
+python package and data adapter - psycopg2 - Run Postgres commands from Python code, instead of the CLI - Use the psycopg2 library and it's inbuilt methods.
+
+### Install the "psycopg2" Python package
+- `pip3 install psycopg2`
+
+# SQlAlchemy
+
+object- relational mapper - bridges gap between python objects and postgres tables. Query and manipulate a database using Python, instead of raw SQL commands.- SQL Alchemy 
+
+### Install the "SQLAlchemy" Python package
+- `pip3 install SQLAlchemy`
+- `pip3 install sqlalchemy==1.4.46`
+
+# Middle abstraction layer
+
+Running basic queries- SQLAlchemy's middle abstraction layer, the Expression Language. - Simplifies queries to the database using tables. - Connect Python and the SQLAlchemy library to the database, using cleaner code.
+
+### Query 1 - select all records from the "Artist" table
+- `select_query = artist_table.select()`
+
+### Query 2 - select only the "Name" column from the "Artist" table
+- `select_query = artist_table.select().with_only_columns([artist_table.c.Name])`
+
+### Query 3 - select only 'Queen' from the "Artist" table
+- `select_query = artist_table.select().where(artist_table.c.Name == "Queen")`
+
+### Query 4 - select only by 'ArtistId' #51 from the "Artist" table
+- `select_query = artist_table.select().where(artist_table.c.ArtistId == 51)`
+
+### Query 5 - select only the albums with 'ArtistId' #51 on the "Album" table
+- `select_query = album_table.select().where(album_table.c.ArtistId == 51)`
+
+### Query 6 - select all tracks where the composer is 'Queen' from the "Track" table
+- `select_query = track_table.select().where(track_table.c.Composer == "Queen")`
+
+# Highest abstraction layer
+
+Introducing class-based models- SQLAlchemy's highest abstraction layer, the ORM. - Simplifies queries to the database using class-based objects. - Connect Python and the SQLAlchemy library to the database, using cleaner code.
+
+Class - collection of methods that serve a common purpose, with each method having its own purpose.
+
+.connect .select .execute - methods have specific duty. 
+using class-based models - can reuse methods throughout application without repeating yourself.
+
+### Create a new file called "sql-orm.py"
+- `touch sql-orm.py`
+
+### Query 1 - select all records from the "Artist" table
+```python
+artists = session.query(Artist)
+for artist in artists:
+    print(artist.ArtistId, artist.Name, sep=" | ")
+```
+
+### Query 2 - select only the "Name" column from the "Artist" table
+```python
+artists = session.query(Artist)
+for artist in artists:
+    print(artist.Name)
+```
+
+### Query 3 - select only "Queen" from the "Artist" table
+```python
+artist = session.query(Artist).filter_by(Name="Queen").first()
+print(artist.ArtistId, artist.Name, sep=" | ")
+```
+
+### Query 4 - select only by "ArtistId" #51 from the "Artist" table
+```python
+artist = session.query(Artist).filter_by(ArtistId=51).first()
+print(artist.ArtistId, artist.Name, sep=" | ")
+```
+
+### Query 5 - select only the albums with "ArtistId" #51 on the "Album" table
+```python
+albums = session.query(Album).filter_by(ArtistId=51)
+for album in albums:
+    print(album.AlbumId, album.Title, album.ArtistId, sep=" | ")
+```
+
+### Query 6 - select all tracks where the composer is "Queen" from the "Track" table
+```python
+tracks = session.query(Track).filter_by(Composer="Queen")
+for track in tracks:
+    print(
+        track.TrackId,
+        track.Name,
+        track.AlbumId,
+        track.MediaTypeId,
+        track.GenreId,
+        track.Composer,
+        track.Milliseconds,
+        track.Bytes,
+        track.UnitPrice,
+        sep=" | "
+    )
+```
+
+# Code along - CRUD 
+C - CREATE 
+R - READ 
+U - UPDATE
+D - DELETE
+

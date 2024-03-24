@@ -2,7 +2,7 @@
 
 ## What I have learnt
 1. [PostgreSQL](#postgresql)
-  - [Postgresql from command line](#postgresql-from-command-line)
+   - [Postgresql from command line](#postgresql-from-command-line)
 2. [Psycopg2](#psycopg2)
 3. [SQlAlchemy](#sqlalchemy)
    - [Middle abstraction layer](#middle-abstraction-layer)
